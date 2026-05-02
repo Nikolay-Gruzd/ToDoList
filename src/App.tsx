@@ -1,6 +1,9 @@
 import './App.css'
 import {TodoListItem} from "./components/TodoListItem/TodoListItem.tsx";
 import {useState} from "react";
+import {getFilteredTasks} from "./Utilities/getFilteredTasks.ts";
+
+// Types //
 
 export type Tasks = {
     id: number
@@ -14,42 +17,38 @@ export const App = () => {
 
     // Data //
 
-    const title1 = "What to learn"
+    const toDoListTitle = "What to learn"
 
-    const [tasks, setTasks] = useState<Tasks[]> ([
-        { id: 1, title: "HTML&CSS", isDone: true },
-        { id: 2, title: "JS", isDone: true },
-        { id: 3, title: "React", isDone: false },
-        { id: 4, title: "Redux", isDone: false },
-        { id: 5, title: "Typescript", isDone: false },
-        { id: 6, title: "RTK query", isDone: false },
+    const [tasks, setTasks] = useState<Tasks[]>([
+        {id: 1, title: "HTML&CSS", isDone: true},
+        {id: 2, title: "JS", isDone: true},
+        {id: 3, title: "React", isDone: false},
+        {id: 4, title: "Redux", isDone: false},
+        {id: 5, title: "Typescript", isDone: false},
+        {id: 6, title: "RTK query", isDone: false},
     ])
 
-    const deleteTask = (taskId: number) => {
-        const filteredTasks = tasks.filter(task => {
+    const [filter, setFilter] = useState<FilterValues>("all")
+
+    // UI //
+
+    const deleteTask = (taskId: Tasks["id"]) => {
+        const nextTasksState: Tasks[] = tasks.filter(task => {
             return task.id !== taskId
         })
-        setTasks(filteredTasks)
+        setTasks(nextTasksState)
     }
 
-    const [filter, setFilter] = useState<FilterValues>("all")
-    let filteredTasks = tasks
-    if (filter === "active") {
-        filteredTasks = tasks.filter( task => !task.isDone)
-    }
-    if ( filter === "completed") {
-        filteredTasks = tasks.filter( task => task.isDone)
-    }
-    const changeFilter = (filter: FilterValues) => {
-        setFilter(filter)
-    }
+    const filteredTasks = getFilteredTasks(tasks, filter)
+
+    const changeToDoListFilter = (filter: FilterValues) => setFilter(filter)
 
     return (
         <div className="app">
             <TodoListItem deleteTask={deleteTask}
-                          title={title1}
+                          title={toDoListTitle}
                           tasks={filteredTasks}
-                          changeFilter={changeFilter}
+                          changeToDoListFilter={changeToDoListFilter}
                           date={"10.04.2026"}/>
         </div>
     )

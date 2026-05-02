@@ -6,10 +6,10 @@ type Props = {
     tasks: Tasks[]
     date?: string
     deleteTask: (taskId: number) => void
-    changeFilter: (filter: FilterValues) => void
+    changeToDoListFilter: (filter: FilterValues) => void
 }
 
-export const TodoListItem = ({title, tasks, date, deleteTask, changeFilter}: Props) => {
+export const TodoListItem = ({title, tasks, date, deleteTask, changeToDoListFilter}: Props) => {
     return (
         <div>
             <h3>{title}</h3>
@@ -34,9 +34,9 @@ export const TodoListItem = ({title, tasks, date, deleteTask, changeFilter}: Pro
             )
             }
             <div>
-                <Button title="All" onClick={() => changeFilter("all")}/>
-                <Button title="Active" onClick={() => changeFilter("active")}/>
-                <Button title="Completed" onClick={() => changeFilter("completed")}/>
+                <Button title="All" onClick={() => changeToDoListFilter("all")}/>
+                <Button title="Active" onClick={() => changeToDoListFilter("active")}/>
+                <Button title="Completed" onClick={() => changeToDoListFilter("completed")}/>
             </div>
             <div>{date}</div>
         </div>
