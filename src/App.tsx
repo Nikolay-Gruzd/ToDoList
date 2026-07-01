@@ -21,32 +21,44 @@ export const App = () => {
 
     // Data //
 
+    const todoListId1 = v1()
+    const todoListId2 = v1()
+
     const [todoLists, setTodoLists] = useState<TodoLists[]>([
-        {id: v1(), title: 'What to learn', filter: 'all'},
-        {id: v1(), title: 'What to buy', filter: 'all'},
+        {id: todoListId1, title: 'What to learn', filter: 'all'},
+        {id: todoListId2, title: 'What to buy', filter: 'all'},
     ])
 
-    const [tasks, setTasks] = useState<Tasks[]>([
-        {id: v1(), title: "HTML&CSS", isDone: true},
-        {id: v1(), title: "JS", isDone: true},
-        {id: v1(), title: "React", isDone: false},
-        {id: v1(), title: "Redux", isDone: false},
-        {id: v1(), title: "Typescript", isDone: false},
-        {id: v1(), title: "RTK query", isDone: false},
-    ])
+    const [tasks, setTasks] = useState({
+        [todoListId1]: [
+            {id: v1(), title: "HTML&CSS", isDone: true},
+            {id: v1(), title: "JS", isDone: true},
+            {id: v1(), title: "React", isDone: false},
+            {id: v1(), title: "Redux", isDone: false},
+            {id: v1(), title: "Typescript", isDone: false},
+            {id: v1(), title: "RTK query", isDone: false},
+        ],
+        [todoListId2]: [
+            {id: v1(), title: "Milk", isDone: true},
+            {id: v1(), title: "Bread", isDone: false},
+            {id: v1(), title: "Salt", isDone: false},
+        ]
+    })
 
     // UI //
 
-    const deleteTask = (taskId: Tasks["id"]) => {
-        const nextTasksState: Tasks[] = tasks.filter(task => {
-            return task.id !== taskId
-        })
-        setTasks(nextTasksState)
+    const deleteTask = (todoListId: TodoLists['id'], taskId: Tasks["id"]) => {
+        const newTasks = {
+            ...tasks,
+            [todoListId]: tasks[todoListId].filter(task => task.id !== taskId)
+        }
+        setTasks(newTasks)
     }
 
-    const createTask = (taskTitle: Tasks["title"]) => {
+    const createTask = (todoListId: TodoLists['id'], taskTitle: Tasks["title"]) => {
+        debugger
         const newTask = {id: v1(), title: taskTitle, isDone: false}
-        const newTasks = [...tasks, newTask]
+        const newTasks = {...tasks, [todoListId]: [newTask, ...tasks[todoListId]] }
         setTasks(newTasks)
     }
 
@@ -57,27 +69,31 @@ export const App = () => {
         setTodoLists(newTodoLists)
     }
 
-    const changeTaskStatusState = (taskId: Tasks["id"], isDone: Tasks["isDone"]) => {
-        const newStatusState = tasks.map(task => task.id === taskId ? {...task, isDone } : task)
-        setTasks(newStatusState)
+    const changeTaskStatus = (todoListId: TodoLists['id'], taskId: Tasks["id"], isDone: Tasks["isDone"]) => {
+        const newTasks = {
+            ...tasks,
+            [todoListId]: tasks[todoListId].map(task => task.id === taskId ? {...task, isDone} : task),
+        }
+        setTasks(newTasks)
     }
 
     return (
         <div className="app">
             {todoLists.map(todoLists => {
-                let filteredTasks = tasks
+                const todoListsTasks = tasks[todoLists.id]
+                let filteredTasks = todoListsTasks
                 if (todoLists.filter === "active") {
-                    filteredTasks = tasks.filter(task => !task.isDone)
+                    filteredTasks = todoListsTasks.filter(task => !task.isDone)
                 }
                 if (todoLists.filter === "completed") {
-                    filteredTasks = tasks.filter(task => task.isDone)
+                    filteredTasks = todoListsTasks.filter(task => task.isDone)
                 }
                 return (
                     <TodoListItem key={todoLists.id}
                                   todoLists={todoLists}
                                   deleteTask={deleteTask}
                                   createTask={createTask}
-                                  changeTaskStatusState={changeTaskStatusState}
+                                  changeTaskStatus={changeTaskStatus}
                                   tasks={filteredTasks}
                                   changeToDoListFilter={changeToDoListFilter}
                                   date={"10.04.2026"}/>

@@ -6,10 +6,10 @@ type Props = {
     todoLists: TodoLists;
     tasks: Tasks[]
     date?: string
-    deleteTask: (taskId: string) => void
-    createTask: (taskTitle: string) => void
+    deleteTask: (todoListId: string, taskId: string) => void
+    createTask: (todoListId: string, taskTitle: string) => void
     changeToDoListFilter: (todoListId: TodoLists['id'], filter: FilterValues) => void
-    changeTaskStatusState: (taskId: string, newStatusValue: boolean) => void
+    changeTaskStatus: (todoListId: string, taskId: string, newStatusValue: boolean) => void
 }
 
 export const TodoListItem = ({
@@ -19,7 +19,7 @@ export const TodoListItem = ({
                                  deleteTask,
                                  createTask,
                                  changeToDoListFilter,
-                                 changeTaskStatusState,
+                                 changeTaskStatus,
                              }: Props) => {
 
     // Data //
@@ -32,7 +32,7 @@ export const TodoListItem = ({
     const createTaskHandler = () => {
         const trimmedTitle = taskTitle.trim()
         if (trimmedTitle !== '') {
-            createTask(trimmedTitle)
+            createTask(id, trimmedTitle)
             setTaskTitle('')
         } else {
             setError('Title is required')
@@ -70,12 +70,12 @@ export const TodoListItem = ({
                 <ul>
                     {tasks.map(task => {
                         const deleteTaskHandler = () => {
-                            deleteTask(task.id)
+                            deleteTask(id, task.id)
                         }
 
                         const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
                             const newStatusValue = e.currentTarget.checked
-                            changeTaskStatusState(task.id, newStatusValue)
+                            changeTaskStatus(id, task.id, newStatusValue)
                         }
 
                         return (
