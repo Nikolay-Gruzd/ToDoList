@@ -6,10 +6,13 @@ import {v1} from "uuid";
 // Types //
 export type FilterValues = "all" | "active" | "completed"
 
-export type Tasks = {
+export type Task = {
     id: string
     title: string
     isDone: boolean
+}
+export type TasksState = {
+    [key: TodoLists['id']]: Task[]
 }
 export type TodoLists = {
     id: string
@@ -29,7 +32,7 @@ export const App = () => {
         {id: todoListId2, title: 'What to buy', filter: 'all'},
     ])
 
-    const [tasks, setTasks] = useState({
+    const [tasks, setTasks] = useState<TasksState>({
         [todoListId1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -47,7 +50,7 @@ export const App = () => {
 
     // UI //
 
-    const deleteTask = (todoListId: TodoLists['id'], taskId: Tasks["id"]) => {
+    const deleteTask = (todoListId: TodoLists['id'], taskId: Task["id"]) => {
         const newTasks = {
             ...tasks,
             [todoListId]: tasks[todoListId].filter(task => task.id !== taskId)
@@ -55,7 +58,7 @@ export const App = () => {
         setTasks(newTasks)
     }
 
-    const createTask = (todoListId: TodoLists['id'], taskTitle: Tasks["title"]) => {
+    const createTask = (todoListId: TodoLists['id'], taskTitle: Task["title"]) => {
         debugger
         const newTask = {id: v1(), title: taskTitle, isDone: false}
         const newTasks = {...tasks, [todoListId]: [newTask, ...tasks[todoListId]] }
@@ -69,7 +72,7 @@ export const App = () => {
         setTodoLists(newTodoLists)
     }
 
-    const changeTaskStatus = (todoListId: TodoLists['id'], taskId: Tasks["id"], isDone: Tasks["isDone"]) => {
+    const changeTaskStatus = (todoListId: TodoLists['id'], taskId: Task["id"], isDone: Task["isDone"]) => {
         const newTasks = {
             ...tasks,
             [todoListId]: tasks[todoListId].map(task => task.id === taskId ? {...task, isDone} : task),

@@ -1,10 +1,10 @@
-import {FilterValues, Tasks, TodoLists} from "../../App.tsx";
+import {FilterValues, Task, TodoLists} from "../../App.tsx";
 import {Button} from "../button/Button.tsx";
 import {ChangeEvent, KeyboardEvent, useState} from "react";
 
 type Props = {
     todoLists: TodoLists;
-    tasks: Tasks[]
+    tasks: Task[]
     date?: string
     deleteTask: (todoListId: TodoLists['id'], taskId: string) => void
     createTask: (todoListId: TodoLists['id'], taskTitle: string) => void
