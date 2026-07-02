@@ -6,10 +6,11 @@ type Props = {
     todoLists: TodoLists;
     tasks: Tasks[]
     date?: string
-    deleteTask: (todoListId: string, taskId: string) => void
-    createTask: (todoListId: string, taskTitle: string) => void
+    deleteTask: (todoListId: TodoLists['id'], taskId: string) => void
+    createTask: (todoListId: TodoLists['id'], taskTitle: string) => void
     changeToDoListFilter: (todoListId: TodoLists['id'], filter: FilterValues) => void
-    changeTaskStatus: (todoListId: string, taskId: string, newStatusValue: boolean) => void
+    changeTaskStatus: (todoListId: TodoLists['id'], taskId: string, newStatusValue: boolean) => void
+    deleteTodoList: (todoListId: TodoLists['id']) => void
 }
 
 export const TodoListItem = ({
@@ -20,6 +21,7 @@ export const TodoListItem = ({
                                  createTask,
                                  changeToDoListFilter,
                                  changeTaskStatus,
+                                 deleteTodoList
                              }: Props) => {
 
     // Data //
@@ -52,9 +54,16 @@ export const TodoListItem = ({
         changeToDoListFilter(id, filter)
     }
 
+    const deleteTodoListHandler = () => {
+        deleteTodoList(id)
+    }
+
     return (
         <div>
-            <h3>{title}</h3>
+            <div className={'container'}>
+                <h3>{title}</h3>
+                <Button title={'x'} onClick={deleteTodoListHandler}/>
+            </div>
             <div>
                 <input value={taskTitle}
                        onChange={changeTaskTitleHandler}
