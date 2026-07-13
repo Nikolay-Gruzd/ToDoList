@@ -2,6 +2,7 @@ import './App.css'
 import {TodoListItem} from "./components/todoListItem/TodoListItem.tsx";
 import {useState} from "react";
 import {v1} from "uuid";
+import {CreateItemForm} from "./components/createItemForm/CreateItemForm.tsx";
 
 // Types //
 export type FilterValues = "all" | "active" | "completed"
@@ -59,9 +60,8 @@ export const App = () => {
     }
 
     const createTask = (todoListId: TodoLists['id'], taskTitle: Task["title"]) => {
-        debugger
         const newTask = {id: v1(), title: taskTitle, isDone: false}
-        const newTasks = {...tasks, [todoListId]: [newTask, ...tasks[todoListId]] }
+        const newTasks = {...tasks, [todoListId]: [newTask, ...tasks[todoListId]]}
         setTasks(newTasks)
     }
 
@@ -86,8 +86,16 @@ export const App = () => {
         setTasks({...tasks})
     }
 
+    const createTodolistHandler = (title: string) => {
+        const todoListId = v1()
+        const newTodoList: TodoLists = {id: todoListId, title: title, filter: 'all'}
+        setTodoLists([...todoLists, newTodoList])
+        setTasks({[todoListId]: [], ...tasks})
+    }
+
     return (
         <div className="app">
+            <CreateItemForm onCreateItem={createTodolistHandler}/>
             {todoLists.map(todoLists => {
                 const todoListsTasks = tasks[todoLists.id]
                 let filteredTasks = todoListsTasks
