@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import Box from '@mui/material/Box'
 
 
 type Props = {
@@ -78,9 +79,12 @@ export const TodoListItem = (
                         }
 
                         return (
-                            <ListItem key={task.id} className={task.isDone ? 'is-done' : ''}>
-                                <Checkbox checked={task.isDone} onChange={changeTaskStatusHandler}/>
-                                <EditableSpan value={task.title} onChange={changeTaskTitleHandler}/>
+                            <ListItem key={task.id}
+                                      sx={{p: 0, justifyContent: 'space-between', opacity: task.isDone ? 0.5 : 1}}>
+                                <div>
+                                    <Checkbox checked={task.isDone} onChange={changeTaskStatusHandler}/>
+                                    <EditableSpan value={task.title} onChange={changeTaskTitleHandler}/>
+                                </div>
                                 <IconButton onClick={deleteTaskHandler} aria-label="delete" size='small'>
                                     <DeleteIcon fontSize="inherit"/>
                                 </IconButton>
@@ -90,7 +94,7 @@ export const TodoListItem = (
                 </List>
             )
             }
-            <div>
+            <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <Button color='inherit'
                         variant={filter === 'all' ? 'outlined' : 'text'}
                         onClick={() => changeFilterHandler("all")}
@@ -109,8 +113,8 @@ export const TodoListItem = (
                 >
                     Completed
                 </Button>
-            </div>
-            <div>{date}</div>
+            </Box>
+            <Box sx={{mt: '10px'}}>{date}</Box>
         </div>
     )
 }
