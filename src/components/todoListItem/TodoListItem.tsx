@@ -14,7 +14,7 @@ import Box from '@mui/material/Box'
 type Props = {
     todoLists: TodoLists,
     tasks: Task[],
-    date?: string,
+    // date?: string,
     deleteTask: (todoListId: string, taskId: string) => void,
     createTask: (todoListId: string, taskTitle: string) => void,
     changeToDoListFilter: (todoListId: string, filter: FilterValues) => void,

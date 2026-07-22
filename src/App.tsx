@@ -152,7 +152,7 @@ export const App = () => {
                                                   createTask={createTask}
                                                   changeTaskStatus={changeTaskStatus}
                                                   changeTaskTitle={changeTaskTitle}
-                                                  date={"10.04.2026"}/>
+                                    />
                                 </Paper>
                             </Grid>
                         )
