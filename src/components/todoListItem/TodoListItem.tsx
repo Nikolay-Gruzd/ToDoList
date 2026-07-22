@@ -79,8 +79,7 @@ export const TodoListItem = (
                         }
 
                         return (
-                            <ListItem key={task.id}
-                                      sx={getListItemSx(task.isDone)}>
+                            <ListItem key={task.id} sx={getListItemSx(task.isDone)}>
                                 <div>
                                     <Checkbox checked={task.isDone} onChange={changeTaskStatusHandler}/>
                                     <EditableSpan value={task.title} onChange={changeTaskTitleHandler}/>
