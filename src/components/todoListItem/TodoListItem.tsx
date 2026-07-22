@@ -28,7 +28,6 @@ export const TodoListItem = (
     {
         todoLists: {id, title, filter},
         tasks,
-        date,
         deleteTask,
         createTask,
         changeToDoListFilter,
@@ -114,7 +113,7 @@ export const TodoListItem = (
                     Completed
                 </Button>
             </Box>
-            <Box sx={{mt: '10px'}}>{date}</Box>
+            {/*<Box sx={{mt: '10px'}}>{date}</Box>*/}
         </div>
     )
 }
