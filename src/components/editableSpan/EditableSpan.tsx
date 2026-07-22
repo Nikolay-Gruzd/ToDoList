@@ -25,7 +25,6 @@ export const EditableSpan = ({value, onChange}: Props) => {
     return (
         <>
             {isEditMode ? (
-                // <input value={title} onChange={changeTitleHandler} onBlur={turnOffEditMode} autoFocus/>
                 <TextField variant='outlined'
                            value={title}
                            size='small'

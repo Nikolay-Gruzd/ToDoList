@@ -1,4 +1,3 @@
-// import {Button} from "../button/Button.tsx";
 import Button from "@mui/material/Button";
 import {ChangeEvent, KeyboardEvent, useState} from "react";
 import TextField from "@mui/material/TextField";
@@ -31,11 +30,6 @@ export const CreateItemForm = ({onCreateItem}: Props) => {
     }
     return (
         <div>
-            {/*<input value={title}*/}
-            {/*       onChange={changeItemTitleHandler}*/}
-            {/*       onKeyDown={createItemOnEnterHandler}*/}
-            {/*       className={error ? 'error' : ''}*/}
-            {/*/>*/}
             <TextField label='Enter a title'
                        variant='outlined'
                        value={title}
@@ -46,8 +40,6 @@ export const CreateItemForm = ({onCreateItem}: Props) => {
                        onKeyDown={createItemOnEnterHandler}
             />
             <Button variant='contained' onClick={createItemHandler}>+</Button>
-            {/*<Button title="+" onClick={createItemHandler}/>*/}
-            {/*{error && <div className={'error-message'}>{error}</div>}*/}
         </div>
     );
 };

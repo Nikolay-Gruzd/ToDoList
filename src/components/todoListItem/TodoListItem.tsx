@@ -1,5 +1,4 @@
 import {FilterValues, Task, TodoLists} from "../../App.tsx";
-// import {Button} from "../button/Button.tsx";
 import {ChangeEvent} from "react";
 import {CreateItemForm} from "../createItemForm/CreateItemForm.tsx";
 import {EditableSpan} from "../editableSpan/EditableSpan.tsx";
@@ -58,7 +57,6 @@ export const TodoListItem = (
                 <IconButton onClick={deleteTodoListHandler} aria-label="delete" size='small'>
                     <DeleteIcon fontSize="inherit"/>
                 </IconButton>
-                {/*<Button title={'x'} onClick={deleteTodoListHandler}/>*/}
             </div>
 
             <CreateItemForm onCreateItem={createTaskHandler}/>
@@ -81,9 +79,6 @@ export const TodoListItem = (
 
                         return (
                             <ListItem key={task.id} className={task.isDone ? 'is-done' : ''}>
-                                {/*<input type="checkbox"*/}
-                                {/*       checked={task.isDone}*/}
-                                {/*       onChange={changeTaskStatusHandler}/>*/}
                                 <Checkbox checked={task.isDone} onChange={changeTaskStatusHandler}/>
                                 <EditableSpan value={task.title} onChange={changeTaskTitleHandler}/>
                                 <IconButton onClick={deleteTaskHandler} aria-label="delete" size='small'>
