@@ -3,7 +3,7 @@ type Props = {
     onClick?: () => void
     className?: string
 }
-export const Button = ({ title, onClick, className }: Props) => {
+export const Button1 = ({ title, onClick, className }: Props) => {
     return (
         <button className={className} onClick={onClick}>{ title }</button>
     );
