@@ -11,6 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Paper from "@mui/material/Paper";
+import {containerSx} from "./components/todoListItem/TodolistItem.styles.ts";
 
 // Types //
 export type FilterValues = "all" | "active" | "completed"
@@ -117,11 +118,15 @@ export const App = () => {
         <div className="app">
             <AppBar position='static' sx={{mb: '30px'}}>
                 <Toolbar>
-                    <Container maxWidth={'lg'}>
+                    <Container maxWidth={'lg'} sx={containerSx}>
                         <IconButton color='inherit'>
                             <MenuIcon />
                         </IconButton>
-                        <Button color='inherit'>Sign in</Button>
+                        <div>
+                            <Button color='inherit'>Sign in</Button>
+                            <Button color='inherit'>Sign up</Button>
+                            <Button color='inherit'>Faq</Button>
+                        </div>
                     </Container>
                 </Toolbar>
             </AppBar>
