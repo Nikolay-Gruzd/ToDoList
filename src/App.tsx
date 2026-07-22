@@ -5,13 +5,13 @@ import {v1} from "uuid";
 import {CreateItemForm} from "./components/createItemForm/CreateItemForm.tsx";
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Paper from "@mui/material/Paper";
 import {containerSx} from "./components/todoListItem/TodolistItem.styles.ts";
+import {NavButton} from "./NavButton.ts";
 
 // Types //
 export type FilterValues = "all" | "active" | "completed"
@@ -123,9 +123,9 @@ export const App = () => {
                             <MenuIcon />
                         </IconButton>
                         <div>
-                            <Button color='inherit'>Sign in</Button>
-                            <Button color='inherit'>Sign up</Button>
-                            <Button color='inherit'>Faq</Button>
+                            <NavButton>Sign in</NavButton>
+                            <NavButton>Sign up</NavButton>
+                            <NavButton>Faq</NavButton>
                         </div>
                     </Container>
                 </Toolbar>
