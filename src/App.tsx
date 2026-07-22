@@ -125,7 +125,7 @@ export const App = () => {
                         <div>
                             <NavButton>Sign in</NavButton>
                             <NavButton>Sign up</NavButton>
-                            <NavButton>Faq</NavButton>
+                            <NavButton background={'dodgerblue'}>Faq</NavButton>
                         </div>
                     </Container>
                 </Toolbar>
