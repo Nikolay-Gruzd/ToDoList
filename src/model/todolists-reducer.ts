@@ -16,11 +16,6 @@ export const deleteTodolistAC = (id: string) => {
     return { type: 'delete_todolist', payload: { id } } as const
 }
 
-export type DeleteTodoListAction = {
-    type: 'delete_todolist',
-    payload: {
-        id: string
-    }
-}
+export type DeleteTodoListAction = ReturnType<typeof deleteTodolistAC> // автоматическая типизация для deleteTodolistAC
 
 type Actions = DeleteTodoListAction
