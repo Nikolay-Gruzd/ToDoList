@@ -17,7 +17,7 @@ test('correct todolist should be deleted', () => {
         payload: {
             id: todoListId1,
         }
-    }
+    } as const // уточняет тип переменной до ее точного значения, т.е. вместо string у action.type мы получаем конкретный строковый тип 'delete_todolist'
 
     const endState = todolistsReducer(startState, action)
 
