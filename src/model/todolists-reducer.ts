@@ -5,14 +5,18 @@ const initialState: TodoList[] = []
 export const todolistsReducer = (state: TodoList[], action: Actions): TodoList[] => {
     switch (action.type) {
         case 'delete_todolist': {
-            return state
+            return state.filter(todolist => todolist.id !== action.payload.id)
         }
         default:
             return state;
     }
 }
 
-type Actions = {
-    type: string,
-    payload: any
+export type DeleteTodoListAction = {
+    type: 'delete_todolist',
+    payload: {
+        id: string
+    }
 }
+
+type Actions = DeleteTodoListAction
