@@ -1,7 +1,7 @@
 import {expect, test} from 'vitest'
 import {v1} from "uuid";
 import {TodoList} from "../App.tsx";
-import {todolistsReducer} from "./todolists-reducer.ts";
+import {deleteTodolistAC, todolistsReducer} from "./todolists-reducer.ts";
 
 test('correct todolist should be deleted', () => {
     const todoListId1 = v1()
@@ -12,14 +12,7 @@ test('correct todolist should be deleted', () => {
         {id: todoListId2, title: 'What to buy', filter: 'all'},
     ]
 
-    const action = {
-        type: 'delete_todolist',
-        payload: {
-            id: todoListId1,
-        }
-    } as const // уточняет тип переменной до ее точного значения, т.е. вместо string у action.type мы получаем конкретный строковый тип 'delete_todolist'
-
-    const endState = todolistsReducer(startState, action)
+    const endState = todolistsReducer(startState, deleteTodolistAC(todoListId1))
 
     expect(endState.length).toBe(1)
     expect(endState[0].id).toBe(todoListId2)
