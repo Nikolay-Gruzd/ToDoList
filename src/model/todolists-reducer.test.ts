@@ -1,7 +1,13 @@
 import {beforeEach, expect, test} from 'vitest'
 import {v1} from "uuid";
 import {TodoList} from "../App.tsx";
-import {changeTodolistTitleAC, createTodolistAC, deleteTodolistAC, todolistsReducer} from "./todolists-reducer.ts";
+import {
+    changeTodolistFilterAC,
+    changeTodolistTitleAC,
+    createTodolistAC,
+    deleteTodolistAC,
+    todolistsReducer
+} from "./todolists-reducer.ts";
 
 let todoListId1 = v1()
 let todoListId2 = v1()
@@ -42,4 +48,13 @@ test('correct todolist should change its title', () => {
 
     expect(endState[0].title).toBe('What to learn')
     expect(endState[1].title).toBe(title)
+})
+
+test('correct todolist should change its filter', () => {
+
+    const filter = 'completed'
+    const endState = todolistsReducer(startState, changeTodolistFilterAC({id: todoListId2, filter}))
+
+    expect(endState[0].filter).toBe('all')
+    expect(endState[1].filter).toBe(filter)
 })
