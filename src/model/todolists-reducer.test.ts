@@ -1,7 +1,7 @@
 import {expect, test} from 'vitest'
 import {v1} from "uuid";
 import {TodoList} from "../App.tsx";
-import {deleteTodolistAC, todolistsReducer} from "./todolists-reducer.ts";
+import {createTodolistAC, deleteTodolistAC, todolistsReducer} from "./todolists-reducer.ts";
 
 test('correct todolist should be deleted', () => {
     const todoListId1 = v1()
@@ -16,4 +16,20 @@ test('correct todolist should be deleted', () => {
 
     expect(endState.length).toBe(1)
     expect(endState[0].id).toBe(todoListId2)
+})
+
+test('correct todolist should be created', () => {
+    const todoListId1 = v1()
+    const todoListId2 = v1()
+
+    const startState: TodoList[] = [
+        {id: todoListId1, title: 'What to learn', filter: 'all'},
+        {id: todoListId2, title: 'What to buy', filter: 'all'},
+    ]
+
+    const title = 'New todolist'
+    const endState = todolistsReducer(startState, createTodolistAC(title))
+
+    expect(endState.length).toBe(3)
+    expect(endState[2].title).toBe(title)
 })
