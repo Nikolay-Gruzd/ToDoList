@@ -15,6 +15,9 @@ export const todolistsReducer = (state: TodoList[], action: Actions): TodoList[]
             // setTasks({[todoListId]: [], ...tasks})
             return [...state, newTodoList]
         }
+        case 'change_todolist_title': {
+            return state.map(t => t.id === payload.id ? {...t, title: payload.title} : t)
+        }
         default:
             return state;
     }
@@ -29,7 +32,12 @@ export const createTodolistAC = (title: string) => {
     return { type: 'create_todolist', payload: { id, title } } as const
 }
 
+export const changeTodolistTitleAC = (payload: {id: string, title: string}) => {
+    return { type: 'change_todolist_title', payload: { id: payload.id, title: payload.title } } as const
+}
+
 export type DeleteTodoListAction = ReturnType<typeof deleteTodolistAC> // автоматическая типизация для deleteTodolistAC
 export type CreateTodoListAction = ReturnType<typeof createTodolistAC> // автоматическая типизация для createTodolistAC
+export type ChangeTodolistTitleAC = ReturnType<typeof changeTodolistTitleAC> // автоматическая типизация для changeTodolistTitleAC
 
-type Actions =  DeleteTodoListAction | CreateTodoListAction
+type Actions = DeleteTodoListAction | CreateTodoListAction | ChangeTodolistTitleAC
