@@ -33,7 +33,7 @@ export type Task = {
     isDone: boolean
 }
 export type TasksState = {
-    [key: TodoList['id']]: Task[]
+    [key: string]: Task[]
 }
 export type TodoList = {
     id: string
@@ -77,7 +77,7 @@ export const App = () => {
 
     // UI //
 
-    const deleteTask = (todoListId: TodoList['id'], taskId: Task["id"]) => {
+    const deleteTask = (todoListId: string, taskId: string) => {
         const newTasks = {
             ...tasks,
             [todoListId]: tasks[todoListId].filter(task => task.id !== taskId)
@@ -85,13 +85,13 @@ export const App = () => {
         setTasks(newTasks)
     }
 
-    const createTask = (todoListId: TodoList['id'], taskTitle: Task["title"]) => {
+    const createTask = (todoListId: string, taskTitle: string) => {
         const newTask = {id: v1(), title: taskTitle, isDone: false}
         const newTasks = {...tasks, [todoListId]: [newTask, ...tasks[todoListId]]}
         setTasks(newTasks)
     }
 
-    const changeTaskStatus = (todoListId: TodoList['id'], taskId: Task["id"], isDone: Task["isDone"]) => {
+    const changeTaskStatus = (todoListId: string, taskId: string, isDone: boolean) => {
         const newTasks = {
             ...tasks,
             [todoListId]: tasks[todoListId].map(task => task.id === taskId ? {...task, isDone} : task),
@@ -105,7 +105,7 @@ export const App = () => {
         )
     }
 
-    const changeToDoListFilter = (todoListId: TodoList['id'], filter: FilterValues) => {
+    const changeToDoListFilter = (todoListId: string, filter: FilterValues) => {
         // const newTodoLists = todoLists.map(todoList => {
         //     return todoList.id === todoListId ? {...todoList, filter} : todoList
         // })
@@ -113,7 +113,7 @@ export const App = () => {
         dispatchToTodolists(action)
     }
 
-    const deleteTodoList = (todoListId: TodoList['id']) => {
+    const deleteTodoList = (todoListId: string) => {
         const action = deleteTodolistAC(todoListId)
         dispatchToTodolists(action)
         delete tasks[todoListId]
