@@ -47,7 +47,7 @@ test('property with todolistId should be deleted', () => {
 test('correct task should be deleted', () => {
     const endState = tasksReducer(
         startState,
-        deleteTaskAC({todolistId: 'todolistId2', taskId: '2'})
+        deleteTaskAC({todoListId: 'todolistId2', taskId: '2'})
     )
 
     expect(endState).toEqual({
@@ -67,7 +67,7 @@ test('correct task should be created at correct array', () => {
     const endState = tasksReducer(
         startState,
         createTaskAC({
-            todolistId: 'todolistId2',
+            todoListId: 'todolistId2',
             title: 'juice',
         })
     )
@@ -82,7 +82,7 @@ test('correct task should be created at correct array', () => {
 test('correct task should be change its status', () => {
     const endState = tasksReducer(
         startState,
-        changeTaskStatusAC({todolistId: 'todolistId2', taskId: '2', isDone: false})
+        changeTaskStatusAC({todoListId: 'todolistId2', taskId: '2', isDone: false})
     )
 
     expect(endState.todolistId2[1].id).toBe('2')
@@ -92,7 +92,7 @@ test('correct task should be change its status', () => {
 test('correct task should be change its title', () => {
     const endState = tasksReducer(
         startState,
-        changeTaskTitleAC({todolistId: 'todolistId2', taskId: '2', title: 'miiiiiiilk'})
+        changeTaskTitleAC({todoListId: 'todolistId2', taskId: '2', title: 'miiiiiiilk'})
     )
 
     expect(endState.todolistId2[1].id).toBe('2')
