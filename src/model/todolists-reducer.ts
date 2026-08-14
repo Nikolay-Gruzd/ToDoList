@@ -1,9 +1,9 @@
 import {FilterValues, TodoList} from "../app/App.tsx";
 import {v1} from "uuid";
 
-// const initialState: TodoList[] = []
+const initialState: TodoList[] = []
 
-export const todolistsReducer = (state: TodoList[], action: Actions): TodoList[] => {
+export const todolistsReducer = (state: TodoList[] = initialState, action: Actions): TodoList[] => {
     const {type, payload} = action
     switch (type) {
         case 'delete_todolist': {
