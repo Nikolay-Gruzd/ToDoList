@@ -1,7 +1,7 @@
 import './App.css'
-import {TodoListItem} from "./components/todoListItem/TodoListItem.tsx";
+import {TodoListItem} from "../components/todoListItem/TodoListItem.tsx";
 import {useReducer, useState} from "react";
-import {CreateItemForm} from "./components/createItemForm/CreateItemForm.tsx";
+import {CreateItemForm} from "../components/createItemForm/CreateItemForm.tsx";
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
@@ -9,8 +9,8 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Paper from "@mui/material/Paper";
-import {containerSx} from "./components/todoListItem/TodolistItem.styles.ts";
-import {NavButton} from "./NavButton.ts";
+import {containerSx} from "../components/todoListItem/TodolistItem.styles.ts";
+import {NavButton} from "../NavButton.ts";
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -19,14 +19,14 @@ import {
     createTodolistAC,
     deleteTodolistAC,
     todolistsReducer
-} from "./model/todolists-reducer.ts";
+} from "../model/todolists-reducer.ts";
 import {
     changeTaskStatusAC,
     changeTaskTitleAC,
     createTaskAC,
     deleteTaskAC,
     tasksReducer
-} from "./model/tasks-reducer.ts";
+} from "../model/tasks-reducer.ts";
 
 // Types //
 type ThemeMode = 'dark' | 'light'
