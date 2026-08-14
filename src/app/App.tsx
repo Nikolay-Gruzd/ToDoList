@@ -1,6 +1,6 @@
 import './App.css'
 import {TodoListItem} from "../components/todoListItem/TodoListItem.tsx";
-import {useReducer, useState} from "react";
+import {useState} from "react";
 import {CreateItemForm} from "../components/createItemForm/CreateItemForm.tsx";
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -18,15 +18,15 @@ import {
     changeTodolistFilterAC, changeTodolistTitleAC,
     createTodolistAC,
     deleteTodolistAC,
-    todolistsReducer
 } from "../model/todolists-reducer.ts";
 import {
     changeTaskStatusAC,
     changeTaskTitleAC,
     createTaskAC,
     deleteTaskAC,
-    tasksReducer
 } from "../model/tasks-reducer.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "./store.ts";
 
 // Types //
 type ThemeMode = 'dark' | 'light'
@@ -51,54 +51,49 @@ export const App = () => {
 
     // Data //
 
+    const todoLists = useSelector<RootState, TodoList[]>(state => state.todolists)
+    const tasks = useSelector<RootState, TasksState>(state => state.tasks)
+    
+    const dispatch = useDispatch()
+
     const [themeMode, setThemeMode] = useState<ThemeMode>('dark')
 
-    const [todoLists, dispatchToTodolists] = useReducer(todolistsReducer, [])
-    const [tasks, dispatchToTasks] = useReducer(tasksReducer, {})
+    // const [todoLists, dispatchToTodolists] = useReducer(todolistsReducer, [])
+    // const [tasks, dispatchToTasks] = useReducer(tasksReducer, {})
 
     // UI //
 
     const deleteTask = (todoListId: string, taskId: string) => {
-        const action = deleteTaskAC({todoListId, taskId})
-        dispatchToTasks(action)
+        dispatch(deleteTaskAC({todoListId, taskId}))
     }
 
     const createTask = (todoListId: string, taskTitle: string) => {
-        const action = createTaskAC({todoListId, title: taskTitle})
-        dispatchToTasks(action)
+        dispatch(createTaskAC({todoListId, title: taskTitle}))
     }
 
     const changeTaskStatus = (todoListId: string, taskId: string, isDone: boolean) => {
-        const action = changeTaskStatusAC({todoListId: todoListId, taskId, isDone})
-        dispatchToTasks(action)
+        dispatch(changeTaskStatusAC({todoListId: todoListId, taskId, isDone}))
     }
 
     const changeTaskTitle = (todoListId: string, taskId: string, title: string) => {
-        const action = changeTaskTitleAC({todoListId, taskId, title})
-        dispatchToTasks(action)
+        dispatch(changeTaskTitleAC({todoListId, taskId, title}))
     }
 
     const changeToDoListFilter = (todoListId: string, filter: FilterValues) => {
-        const action = changeTodolistFilterAC({id: todoListId, filter})
-        dispatchToTodolists(action)
+        dispatch(changeTodolistFilterAC({id: todoListId, filter}))
     }
 
     const deleteTodoList = (todoListId: string) => {
-        const action = deleteTodolistAC(todoListId)
-        dispatchToTodolists(action)
-        delete tasks[todoListId]
-        dispatchToTasks(action)
+        dispatch(deleteTodolistAC(todoListId))
+        // delete tasks[todoListId]
     }
 
-    const createTodolistHandler = (title: string) => {
-        const action = createTodolistAC(title)
-        dispatchToTodolists(action)
-        dispatchToTasks(action)
+    const createTodolist = (title: string) => {
+        dispatch(createTodolistAC(title))
     }
 
     const changeTodoListTitle = (todolistId: string, title: string) => {
-        const action = changeTodolistTitleAC({id: todolistId, title})
-        dispatchToTodolists(action)
+        dispatch(changeTodolistTitleAC({id: todolistId, title}))
     }
 
     const theme = createTheme({
@@ -134,7 +129,7 @@ export const App = () => {
                 </AppBar>
                 <Container maxWidth={'lg'}>
                     <Grid container sx={{mb: '30px'}}>
-                        <CreateItemForm onCreateItem={createTodolistHandler}/>
+                        <CreateItemForm onCreateItem={createTodolist}/>
                     </Grid>
                     <Grid container spacing={4}>
                         {todoLists.map(todoLists => {
