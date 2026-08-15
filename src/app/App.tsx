@@ -25,8 +25,9 @@ import {
     createTaskAC,
     deleteTaskAC,
 } from "../model/tasks-reducer.ts";
-import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./store.ts";
+import {useAppDispatch} from "../common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "../common/hooks/useAppSelector.ts";
 
 // Types //
 type ThemeMode = 'dark' | 'light'
@@ -51,10 +52,10 @@ export const App = () => {
 
     // Data //
 
-    const todoLists = useSelector<RootState, TodoList[]>(state => state.todolists)
-    const tasks = useSelector<RootState, TasksState>(state => state.tasks)
+    const todoLists = useAppSelector<RootState, TodoList[]>(state => state.todolists)
+    const tasks = useAppSelector<RootState, TasksState>(state => state.tasks)
     
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const [themeMode, setThemeMode] = useState<ThemeMode>('dark')
 
