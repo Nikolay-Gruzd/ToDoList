@@ -1,4 +1,4 @@
-import {FilterValues, Task, TodoLists} from "../../app/App.tsx";
+import {FilterValues, Task, TodoList} from "../../app/App.tsx";
 import {ChangeEvent} from "react";
 import {CreateItemForm} from "../createItemForm/CreateItemForm.tsx";
 import {EditableSpan} from "../editableSpan/EditableSpan.tsx";
@@ -13,7 +13,7 @@ import {containerSx, getListItemSx} from "./TodolistItem.styles.ts";
 
 
 type Props = {
-    todoLists: TodoLists,
+    todoLists: TodoList,
     tasks: Task[],
     // date?: string,
     deleteTask: (todoListId: string, taskId: string) => void,
