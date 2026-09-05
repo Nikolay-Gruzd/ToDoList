@@ -1,6 +1,5 @@
 import './App.css'
 import {TodoListItem} from "../components/todoListItem/TodoListItem.tsx";
-import {useState} from "react";
 import {CreateItemForm} from "../components/createItemForm/CreateItemForm.tsx";
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -11,7 +10,7 @@ import Grid from '@mui/material/Grid'
 import Paper from "@mui/material/Paper";
 import {containerSx} from "../components/todoListItem/TodolistItem.styles.ts";
 import {NavButton} from "../NavButton.ts";
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import {ThemeProvider} from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
 import CssBaseline from '@mui/material/CssBaseline'
 import {
@@ -29,9 +28,11 @@ import {useAppDispatch} from "../common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "../common/hooks/useAppSelector.ts";
 import {selectTodolists} from "../model/todolists-selectors.ts";
 import {selectTasks} from "../model/tasks-selectors.ts";
+import {changeThemeModeAC} from "./app-reducer.ts";
+import {selectChangeThemeMode} from "./app-selectors.ts";
+import {getTheme} from "../common/theme/theme.ts";
 
 // Types //
-type ThemeMode = 'dark' | 'light'
 
 export type FilterValues = "all" | "active" | "completed"
 
@@ -40,9 +41,11 @@ export type Task = {
     title: string
     isDone: boolean
 }
-export type TasksState = {
-    [key: string]: Task[]
-}
+export type TasksState = Record<string, Task[]>
+    // {
+    //     [key: string]: Task[]
+    // }
+
 export type TodoList = {
     id: string
     title: string
@@ -55,13 +58,11 @@ export const App = () => {
 
     const todoLists = useAppSelector(selectTodolists)
     const tasks = useAppSelector(selectTasks)
-    
+    const themeMode = useAppSelector(selectChangeThemeMode)
+
     const dispatch = useAppDispatch()
 
-    const [themeMode, setThemeMode] = useState<ThemeMode>('dark')
-
-    // const [todoLists, dispatchToTodolists] = useReducer(todolistsReducer, [])
-    // const [tasks, dispatchToTasks] = useReducer(tasksReducer, {})
+    const theme = getTheme(themeMode)
 
     // UI //
 
@@ -98,27 +99,20 @@ export const App = () => {
         dispatch(changeTodolistTitleAC({id: todolistId, title}))
     }
 
-    const theme = createTheme({
-        palette: {
-            mode: themeMode,
-            primary: {
-                main: '#087EA4'
-            }
-        }
-    })
     const changeMode = () => {
-        setThemeMode(themeMode === 'light' ? 'dark' : 'light')
+        dispatch(changeThemeModeAC({themeMode: themeMode === 'dark' ? 'light' : 'dark'}))
+        // setThemeMode(themeMode === 'light' ? 'dark' : 'light')
     }
 
     return (
         <div className="app">
             <ThemeProvider theme={theme}>
-                <CssBaseline />
+                <CssBaseline/>
                 <AppBar position='static' sx={{mb: '30px'}}>
                     <Toolbar>
                         <Container maxWidth={'lg'} sx={containerSx}>
                             <IconButton color='inherit'>
-                                <MenuIcon />
+                                <MenuIcon/>
                             </IconButton>
                             <div>
                                 <NavButton>Sign in</NavButton>
@@ -160,7 +154,7 @@ export const App = () => {
                                     </Paper>
                                 </Grid>
                             )
-                        }) }
+                        })}
                     </Grid>
                 </Container>
             </ThemeProvider>
