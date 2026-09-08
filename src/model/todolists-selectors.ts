@@ -1,4 +1,4 @@
 import {RootState} from "../app/store.ts";
-import {TodoList} from "../app/App.tsx";
+import {TodoList} from "../app/Main.tsx";
 
 export const selectTodolists = (state: RootState): TodoList[] => state.todolists
