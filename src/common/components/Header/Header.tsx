@@ -1,6 +1,5 @@
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
-import {containerSx} from "@/features/todolists/ui/TodoLists/TodoListItem/TodolistItem.styles.ts";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import {NavButton} from "@/common/components/NavButton/NavButton.ts";
@@ -11,6 +10,7 @@ import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {selectChangeThemeMode} from "@/app/app-selectors.ts";
 import {getTheme} from "@/common/theme/theme.ts";
+import {containerSx} from "@/common/styles/container.styles.ts";
 
 export const Header = () => {
 

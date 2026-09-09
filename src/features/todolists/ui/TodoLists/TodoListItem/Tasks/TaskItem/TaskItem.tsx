@@ -4,10 +4,10 @@ import {Task} from "@/app/Main.tsx";
 import {ChangeEvent} from "react";
 import ListItem from "@mui/material/ListItem";
 import Checkbox from "@mui/material/Checkbox";
-import {getListItemSx} from "@/features/todolists/ui/TodoLists/TodoListItem/TodolistItem.styles.ts";
 import {EditableSpan} from "@/common/components/EditableSpan/EditableSpan.tsx";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete"
+import {getListItemSx} from "@/features/todolists/ui/TodoLists/TodoListItem/Tasks/TaskItem/TaskItem.styles.ts";
 
 type Props = {
     task: Task
