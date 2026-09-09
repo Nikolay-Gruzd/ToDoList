@@ -1,6 +1,6 @@
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
-import {containerSx} from "@/common/components/Todolists/TodoListItem/TodolistItem.styles.ts";
+import {containerSx} from "@/features/todolists/ui/TodoLists/TodoListItem/TodolistItem.styles.ts";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import {NavButton} from "@/NavButton.ts";

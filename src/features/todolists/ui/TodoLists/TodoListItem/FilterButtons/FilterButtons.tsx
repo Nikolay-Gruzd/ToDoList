@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import {containerSx} from "@/common/components/Todolists/TodoListItem/TodolistItem.styles.ts";
+import {containerSx} from "@/features/todolists/ui/TodoLists/TodoListItem/TodolistItem.styles.ts";
 import {FilterValues, TodoList} from "@/app/Main.tsx";
 import {changeTodolistFilterAC} from "@/model/todolists-reducer.ts";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";

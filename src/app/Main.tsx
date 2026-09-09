@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import {CreateItemForm} from "@/common/components/CreateItemForm/CreateItemForm.tsx";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {createTodolistAC} from "@/model/todolists-reducer.ts";
-import {Todolists} from "@/common/components/Todolists/Todolists.tsx";
+import {Todolists} from "@/features/todolists/ui/TodoLists/Todolists.tsx";
 
 // Types //
 
