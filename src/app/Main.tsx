@@ -2,7 +2,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import {CreateItemForm} from "@/common/components/CreateItemForm/CreateItemForm.tsx";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
-import {createTodolistAC} from "@/model/todolists-reducer.ts";
+import {createTodolistAC} from "@/features/todolists/model/todolists-reducer.ts";
 import {Todolists} from "@/features/todolists/ui/TodoLists/Todolists.tsx";
 
 // Types //
