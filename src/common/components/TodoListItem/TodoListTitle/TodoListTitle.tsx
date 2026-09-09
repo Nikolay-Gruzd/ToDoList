@@ -1,0 +1,32 @@
+import {EditableSpan} from "@/common/components/EditableSpan/EditableSpan.tsx";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import {changeTodolistTitleAC, deleteTodolistAC} from "@/model/todolists-reducer.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {TodoList} from "@/app/Main.tsx";
+
+type Props = {
+    todoLists: TodoList
+}
+
+export const TodoListTitle = ({todoLists}: Props) => {
+    const {id, title} = todoLists
+
+    const dispatch = useAppDispatch()
+
+    const deleteTodoList = () => {
+        dispatch(deleteTodolistAC({id}))
+    }
+    const changeTodoListTitle = (title: string) => {
+        dispatch(changeTodolistTitleAC({id, title}))
+    }
+
+    return (
+        <div className={'container'}>
+            <h3><EditableSpan value={title} onChange={changeTodoListTitle}/></h3>
+            <IconButton onClick={deleteTodoList} aria-label="delete" size='small'>
+                <DeleteIcon fontSize="inherit"/>
+            </IconButton>
+        </div>
+    );
+};

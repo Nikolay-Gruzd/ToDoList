@@ -14,14 +14,17 @@ import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {selectTasks} from "@/model/tasks-selectors.ts";
 import {changeTaskStatusAC, changeTaskTitleAC, createTaskAC, deleteTaskAC} from "@/model/tasks-reducer.ts";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
-import {changeTodolistFilterAC, changeTodolistTitleAC, deleteTodolistAC} from "@/model/todolists-reducer.ts";
+import {changeTodolistFilterAC} from "@/model/todolists-reducer.ts";
+import {TodoListTitle} from "@/common/components/TodoListItem/TodoListTitle/TodoListTitle.tsx";
 
 
 type Props = {
     todoLists: TodoList,
 }
 
-export const TodoListItem = ({ todoLists: {id, title, filter} }: Props) => {
+export const TodoListItem = ({ todoLists }: Props) => {
+
+    const {id, filter} = todoLists;
 
     const tasks = useAppSelector(selectTasks);
 
@@ -36,12 +39,6 @@ export const TodoListItem = ({ todoLists: {id, title, filter} }: Props) => {
         filteredTasks = todolistTasks.filter(task => task.isDone)
     }
 
-    const deleteTodoList = () => {
-        dispatch(deleteTodolistAC({id: id}))
-    }
-    const changeTodoListTitle = (title: string) => {
-        dispatch(changeTodolistTitleAC({id: id, title}))
-    }
     const changeToDoListFilter = (filter: FilterValues) => {
         dispatch(changeTodolistFilterAC({id: id, filter}))
     }
@@ -51,13 +48,7 @@ export const TodoListItem = ({ todoLists: {id, title, filter} }: Props) => {
 
     return (
         <div>
-            <div className={'container'}>
-                <h3><EditableSpan value={title} onChange={changeTodoListTitle}/></h3>
-                <IconButton onClick={deleteTodoList} aria-label="delete" size='small'>
-                    <DeleteIcon fontSize="inherit"/>
-                </IconButton>
-            </div>
-
+            <TodoListTitle todoLists={todoLists}/>
             <CreateItemForm onCreateItem={createTaskHandler}/>
 
             {filteredTasks.length === 0 ? (
