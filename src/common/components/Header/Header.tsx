@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import {containerSx} from "@/features/todolists/ui/TodoLists/TodoListItem/TodolistItem.styles.ts";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import {NavButton} from "@/NavButton.ts";
+import {NavButton} from "@/common/components/NavButton/NavButton.ts";
 import Switch from "@mui/material/Switch";
 import AppBar from "@mui/material/AppBar";
 import {changeThemeModeAC} from "@/app/app-reducer.ts";
