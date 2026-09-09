@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import {TodoListItem} from "@/common/components/TodoListItem/TodoListItem.tsx";
+import {TodoListItem} from "@/common/components/Todolists/TodoListItem/TodoListItem.tsx";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {selectTodolists} from "@/model/todolists-selectors.ts";
 
@@ -9,7 +9,7 @@ export const Todolists = () => {
     const todoLists = useAppSelector(selectTodolists)
 
     return (
-        <div>
+        <>
             {todoLists.map(todoLists => {
                 return (
                     <Grid key={todoLists.id}>
@@ -19,6 +19,6 @@ export const Todolists = () => {
                     </Grid>
                 )
             })}
-        </div>
+        </>
     );
 };

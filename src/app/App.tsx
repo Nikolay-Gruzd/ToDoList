@@ -14,12 +14,12 @@ export const App = () => {
 
     // UI //
     return (
-        <div className="app">
-            <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+            <div className="app">
                 <CssBaseline/>
-                <Header />
-                <Main />
-            </ThemeProvider>
-        </div>
+                <Header/>
+                <Main/>
+            </div>
+        </ThemeProvider>
     )
 }
