@@ -7,7 +7,7 @@ import {appReducer} from "./app-reducer.ts";
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
-    themeMode: appReducer
+    app: appReducer
 })
 
 // создание store
