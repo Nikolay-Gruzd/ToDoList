@@ -1,5 +1,5 @@
 {
-  "name": "todolist-01",
+  "name": "todolist",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,6 +15,7 @@
     "@mui/icons-material": "^9.2.0",
     "@mui/material": "^9.2.0",
     "@reduxjs/toolkit": "^2.12.0",
+    "axios": "^1.20.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-redux": "^9.3.0"

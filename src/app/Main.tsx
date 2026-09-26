@@ -4,8 +4,11 @@ import {CreateItemForm} from "@/common/components/CreateItemForm/CreateItemForm.
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {createTodolistAC} from "@/features/todolists/model/todolists-reducer.ts";
 import {Todolists} from "@/features/todolists/ui/TodoLists/Todolists.tsx";
+import {token} from "@/app/token.ts"; // Секретный токен не добавлен в Git
 
 // Types //
+
+console.log(token)
 
 export type FilterValues = "all" | "active" | "completed"
 
