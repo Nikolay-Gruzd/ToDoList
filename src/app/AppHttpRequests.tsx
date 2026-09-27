@@ -3,33 +3,9 @@ import Checkbox from '@mui/material/Checkbox'
 import {CreateItemForm} from '@/common/components/CreateItemForm/CreateItemForm'
 import {EditableSpan} from '@/common/components/EditableSpan/EditableSpan'
 import axios from 'axios'
-import {apiKey, token} from "@/app/token.ts"; // Секретный токен не добавлен в Git
-
-export type FieldError = {
-    error: string
-    field: string
-}
-
-type CreateTodolistResponse = {
-    data: { item: Todolist }
-    resultCode: number
-    messages: string[]
-    fieldsErrors: FieldError[]
-}
-
-type DeleteTodolistResponse = {
-    data: {}
-    resultCode: number
-    messages: string[]
-    fieldsErrors: FieldError[]
-}
-
-type UpdateTodolistResponse = {
-    data: {}
-    resultCode: number
-    messages: string[]
-    fieldsErrors: FieldError[]
-}
+// Секретный токен не добавлен в Git
+import {apiKey, token} from "@/app/token.ts";
+import {BaseResponse} from "@/common/types/types.ts";
 
 export type Todolist = {
     id: string
@@ -54,7 +30,7 @@ export const AppHttpRequests = () => {
 
     const createTodolist = (title: string) => {
         axios
-            .post<CreateTodolistResponse>('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, {
+            .post<BaseResponse<{ item: Todolist }>>('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'API-KEY': apiKey
@@ -69,24 +45,24 @@ export const AppHttpRequests = () => {
 
     const deleteTodolist = (id: string) => {
         axios
-            .delete<DeleteTodolistResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {
+            .delete<BaseResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'API-KEY': apiKey
                 }
             })
-            .then(() => setTodolists(prev => prev.filter( tl => tl.id !== id)))
+            .then(() => setTodolists(prev => prev.filter(tl => tl.id !== id)))
     }
 
     const changeTodolistTitle = (id: string, title: string) => {
-            axios
-                .put<UpdateTodolistResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {title}, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'API-KEY': apiKey
-                    }
-                })
-                .then(() => setTodolists(todolists.map( tl => tl.id === id ? { ...tl, title } : tl )))
+        axios
+            .put<BaseResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {title}, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'API-KEY': apiKey
+                }
+            })
+            .then(() => setTodolists(prev => prev.map(tl => tl.id === id ? {...tl, title} : tl)))
     }
 
     const createTask = (todolistId: string, title: string) => {
