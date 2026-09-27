@@ -4,7 +4,7 @@ import {CreateItemForm, EditableSpan} from '@/common/components'
 import axios from 'axios'
 // Секретный токен не добавлен в Git
 import {apiKey, token} from "@/app/token.ts";
-import {BaseResponse} from "@/common/types/types.ts";
+import type {BaseResponse} from '@/common/types'
 
 export type Todolist = {
     id: string
