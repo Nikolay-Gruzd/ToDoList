@@ -1,7 +1,6 @@
 import {type ChangeEvent, type CSSProperties, useEffect, useState} from 'react'
 import Checkbox from '@mui/material/Checkbox'
-import {CreateItemForm} from '@/common/components/CreateItemForm/CreateItemForm'
-import {EditableSpan} from '@/common/components/EditableSpan/EditableSpan'
+import {CreateItemForm, EditableSpan} from '@/common/components'
 import axios from 'axios'
 // Секретный токен не добавлен в Git
 import {apiKey, token} from "@/app/token.ts";
