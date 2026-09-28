@@ -1,18 +1,9 @@
 import {type ChangeEvent, type CSSProperties, useEffect, useState} from 'react'
 import Checkbox from '@mui/material/Checkbox'
 import {CreateItemForm, EditableSpan} from '@/common/components'
-import axios from 'axios'
-// Секретный токен не добавлен в Git
-import {apiKey, token} from "@/common/instance/";
 import type {BaseResponse} from '@/common/types'
 import {instance} from "@/common/instance/instance.ts";
-
-export type Todolist = {
-    id: string
-    title: string
-    addedDate: string
-    order: number
-}
+import {Todolist} from "@/features/todolists/api/todolistsApi.types.ts";
 
 export const AppHttpRequests = () => {
     const [todolists, setTodolists] = useState<Todolist[]>([])
