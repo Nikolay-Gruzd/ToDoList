@@ -4,15 +4,14 @@ import {CreateItemForm, EditableSpan} from '@/common/components'
 import type {BaseResponse} from '@/common/types'
 import {instance} from "@/common/instance/instance.ts";
 import {Todolist} from "@/features/todolists/api/todolistsApi.types.ts";
+import {todolistsApi} from "@/features/todolists/api/todolistsApi.ts";
 
 export const AppHttpRequests = () => {
     const [todolists, setTodolists] = useState<Todolist[]>([])
     const [tasks, setTasks] = useState<any>({})
 
     useEffect(() => {
-        instance
-            .get<Todolist[]>('/todo-lists')
-            .then(res => setTodolists(res.data))
+        todolistsApi.getTodolists().then(res => setTodolists(res.data))
     }, [])
 
     const createTodolist = (title: string) => {
