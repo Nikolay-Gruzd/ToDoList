@@ -30,8 +30,7 @@ export const AppHttpRequests = () => {
     }
 
     const changeTodolistTitle = (id: string, title: string) => {
-        instance
-            .put<BaseResponse>(`/todo-lists/${id}`, {title})
+        todolistsApi.changeTodolistTitle({id, title})
             .then(() => setTodolists(prev => prev.map(tl => tl.id === id ? {...tl, title} : tl)))
     }
 
