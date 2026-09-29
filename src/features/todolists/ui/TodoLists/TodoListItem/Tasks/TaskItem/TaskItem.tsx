@@ -1,4 +1,4 @@
-import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppDispatch} from "@/common/hooks/index.ts";
 import {changeTaskStatusAC, changeTaskTitleAC, deleteTaskAC} from "@/features/todolists/model/tasks-reducer.ts";
 import {Task} from "@/app/Main.tsx";
 import {ChangeEvent} from "react";
