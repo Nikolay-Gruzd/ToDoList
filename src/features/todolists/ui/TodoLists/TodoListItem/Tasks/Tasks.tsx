@@ -1,4 +1,4 @@
-import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
+import {useAppSelector} from "@/common/hooks";
 import {selectTasks} from "@/features/todolists/model/tasks-selectors.ts";
 import List from "@mui/material/List";
 import {TodoList} from "@/app/Main.tsx";
