@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-src/common/instance/instance.ts
+src/common/instance/api.ts
