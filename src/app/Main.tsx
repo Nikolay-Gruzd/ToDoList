@@ -1,43 +1,42 @@
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import {CreateItemForm} from "@/common/components";
-import {useAppDispatch} from "@/common/hooks";
-import {createTodolistAC} from "@/features/todolists/model/todolists-reducer.ts";
-import {Todolists} from "@/features/todolists/ui/TodoLists/Todolists.tsx";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import { CreateItemForm } from "@/common/components"
+import { useAppDispatch } from "@/common/hooks"
+import { createTodolistAC } from "@/features/todolists/model/todolists-reducer.ts"
+import { Todolists } from "@/features/todolists/ui/TodoLists/Todolists.tsx"
 
 // Types //
 
 export type FilterValues = "all" | "active" | "completed"
 
 export type Task = {
-    id: string
-    title: string
-    isDone: boolean
+  id: string
+  title: string
+  isDone: boolean
 }
-export type TasksState = Record<string, Task[]>  // { [key: string]: Task[] }
+export type TasksState = Record<string, Task[]> // { [key: string]: Task[] }
 
 export type TodoList = {
-    id: string
-    title: string
-    filter: FilterValues
+  id: string
+  title: string
+  filter: FilterValues
 }
 
 export const Main = () => {
+  const dispatch = useAppDispatch()
 
-    const dispatch = useAppDispatch()
+  const createTodolist = (title: string) => {
+    dispatch(createTodolistAC(title))
+  }
 
-    const createTodolist = (title: string) => {
-        dispatch(createTodolistAC(title))
-    }
-
-    return (
-        <Container maxWidth={'lg'}>
-            <Grid container sx={{mb: '30px'}}>
-                <CreateItemForm onCreateItem={createTodolist}/>
-            </Grid>
-            <Grid container spacing={4}>
-                <Todolists/>
-            </Grid>
-        </Container>
-    );
-};
+  return (
+    <Container maxWidth={"lg"}>
+      <Grid container sx={{ mb: "30px" }}>
+        <CreateItemForm onCreateItem={createTodolist} />
+      </Grid>
+      <Grid container spacing={4}>
+        <Todolists />
+      </Grid>
+    </Container>
+  )
+}

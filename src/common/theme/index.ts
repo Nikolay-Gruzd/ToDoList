@@ -1,1 +1,1 @@
-export {getTheme} from './theme.ts'
+export { getTheme } from "./theme.ts"

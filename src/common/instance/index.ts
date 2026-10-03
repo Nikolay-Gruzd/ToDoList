@@ -1,1 +1,1 @@
-export {instance} from './instance.ts'
+export { instance } from "./instance.ts"
