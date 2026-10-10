@@ -4,17 +4,20 @@ import { CreateItemForm, EditableSpan } from "@/common/components"
 import { Todolist } from "@/features/todolists/api/todolistsApi.types.ts"
 import { todolistsApi } from "@/features/todolists/api/todolistsApi.ts"
 import { tasksApi } from "@/features/todolists/api/tasksApi.ts"
+import { DomainTask } from "@/features/todolists/api/tasksApi.types.ts"
 
 export const AppHttpRequests = () => {
   const [todolists, setTodolists] = useState<Todolist[]>([])
-  const [tasks, setTasks] = useState<any>({})
+  const [tasks, setTasks] = useState<Record<string, DomainTask[]>>({})
 
   useEffect(() => {
     todolistsApi.getTodolists().then((res) => {
       const todolists = res.data
       setTodolists(todolists)
       todolists.forEach((todolist) => {
-        tasksApi.getTasks(todolist.id).then((res) => console.log(res.data))
+        tasksApi.getTasks(todolist.id).then((res) => {
+          setTasks({ ...tasks, [todolist.id]: res.data.items })
+        })
       })
     })
   }, [])
