@@ -1,5 +1,5 @@
 import { instance } from "@/common/instance"
-import { DomainTask, GetTasksResponse } from "@/features/todolists/api/tasksApi.types.ts"
+import { DomainTask, GetTasksResponse, UpdateTaskModel } from "@/features/todolists/api/tasksApi.types.ts"
 import { BaseResponse } from "@/common/types"
 
 export const tasksApi = {
@@ -8,5 +8,8 @@ export const tasksApi = {
   },
   createTask(todolistId: string, title: string) {
     return instance.post<BaseResponse<{ item: DomainTask }>>(`/todo-lists/${todolistId}/tasks`, { title })
+  },
+  updateTask(todolistId: string, taskId: string, model: UpdateTaskModel) {
+    return instance.put(`/todo-lists/${todolistId}/tasks/${taskId}`, model)
   },
 }

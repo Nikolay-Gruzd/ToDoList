@@ -16,3 +16,12 @@ export type DomainTask = {
   order: number
   addedDate: string
 }
+
+export type UpdateTaskModel = {
+  description: string
+  title: string
+  status: number
+  priority: number
+  startDate: string
+  deadline: string
+}
