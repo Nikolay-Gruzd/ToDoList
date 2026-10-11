@@ -39,7 +39,17 @@ export const AppHttpRequests = () => {
       .then(() => setTodolists((prev) => prev.map((tl) => (tl.id === id ? { ...tl, title } : tl))))
   }
 
-  const createTask = (todolistId: string, title: string) => {}
+  const createTask = (todolistId: string, title: string) => {
+    console.log(tasks)
+    tasksApi.createTask(todolistId, title).then((res) => {
+      console.log(res.data.data.item)
+      const newTask = res.data.data.item
+      setTasks((prev) => ({
+        ...prev,
+        [todolistId]: [newTask, ...(prev[todolistId] ?? [])],
+      }))
+    })
+  }
 
   const deleteTask = (todolistId: string, taskId: string) => {}
 
