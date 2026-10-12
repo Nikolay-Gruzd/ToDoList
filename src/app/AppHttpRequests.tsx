@@ -50,7 +50,15 @@ export const AppHttpRequests = () => {
     })
   }
 
-  const deleteTask = (todolistId: string, taskId: string) => {}
+  const deleteTask = (todolistId: string, taskId: string) => {
+    tasksApi.deleteTask(todolistId, taskId).then((res) => {
+      const deletedTask = res.data.data
+      setTasks((prev) => ({
+        ...prev,
+        [todolistId]: (prev[todolistId] ?? []).filter((task) => task.id !== taskId),
+      }))
+    })
+  }
 
   const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>, task: DomainTask) => {
     const todolistId = task.todoListId

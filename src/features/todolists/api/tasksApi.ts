@@ -10,6 +10,9 @@ export const tasksApi = {
     return instance.post<BaseResponse<{ item: DomainTask }>>(`/todo-lists/${todolistId}/tasks`, { title })
   },
   updateTask(todolistId: string, taskId: string, model: UpdateTaskModel) {
-    return instance.put(`/todo-lists/${todolistId}/tasks/${taskId}`, model)
+    return instance.put<BaseResponse>(`/todo-lists/${todolistId}/tasks/${taskId}`, model)
+  },
+  deleteTask(todolistId: string, taskId: string) {
+    return instance.delete<BaseResponse>(`/todo-lists/${todolistId}/tasks/${taskId}`)
   },
 }
