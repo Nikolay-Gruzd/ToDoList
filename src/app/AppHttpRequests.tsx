@@ -17,7 +17,10 @@ export const AppHttpRequests = () => {
       setTodolists(todolists)
       todolists.forEach((todolist) => {
         tasksApi.getTasks(todolist.id).then((res) => {
-          setTasks({ ...tasks, [todolist.id]: res.data.items })
+          setTasks((prev) => ({
+            ...prev,
+            [todolist.id]: res.data.items,
+          }))
         })
       })
     })
@@ -26,7 +29,7 @@ export const AppHttpRequests = () => {
   const createTodolist = (title: string) => {
     todolistsApi.createTodolist(title).then((res) => {
       const newTodolist = res.data.data.item
-      setTodolists([newTodolist, ...todolists])
+      setTodolists((prev) => [newTodolist, ...prev])
     })
   }
 
@@ -73,7 +76,10 @@ export const AppHttpRequests = () => {
     }
 
     tasksApi.updateTask(todolistId, taskId, model).then(() => {
-      setTasks({ ...tasks, [todolistId]: tasks[todolistId].map((t) => (t.id === taskId ? { ...t, ...model } : t)) })
+      setTasks((prev) => ({
+        ...prev,
+        [todolistId]: prev[todolistId].map((t) => (t.id === taskId ? { ...t, ...model } : t)),
+      }))
     })
   }
 
@@ -91,7 +97,10 @@ export const AppHttpRequests = () => {
     }
 
     tasksApi.updateTask(todolistId, taskId, model).then(() => {
-      setTasks({ ...tasks, [todolistId]: tasks[todolistId].map((t) => (t.id === taskId ? { ...t, ...model } : t)) })
+      setTasks((prev) => ({
+        ...prev,
+        [todolistId]: prev[todolistId].map((t) => (t.id === taskId ? { ...t, ...model } : t)),
+      }))
     })
   }
 
