@@ -51,8 +51,7 @@ export const AppHttpRequests = () => {
   }
 
   const deleteTask = (todolistId: string, taskId: string) => {
-    tasksApi.deleteTask(todolistId, taskId).then((res) => {
-      const deletedTask = res.data.data
+    tasksApi.deleteTask(todolistId, taskId).then(() => {
       setTasks((prev) => ({
         ...prev,
         [todolistId]: (prev[todolistId] ?? []).filter((task) => task.id !== taskId),
@@ -78,7 +77,23 @@ export const AppHttpRequests = () => {
     })
   }
 
-  const changeTaskTitle = (task: any, title: string) => {}
+  const changeTaskTitle = (task: DomainTask, title: string) => {
+    const todolistId = task.todoListId
+    const taskId = task.id
+
+    const model: UpdateTaskModel = {
+      description: task.description,
+      title: title,
+      priority: task.priority,
+      startDate: task.startDate,
+      deadline: task.deadline,
+      status: task.status,
+    }
+
+    tasksApi.updateTask(todolistId, taskId, model).then(() => {
+      setTasks({ ...tasks, [todolistId]: tasks[todolistId].map((t) => (t.id === taskId ? { ...t, ...model } : t)) })
+    })
+  }
 
   return (
     <div style={{ margin: "20px" }}>
