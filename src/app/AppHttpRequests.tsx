@@ -13,7 +13,7 @@ export const AppHttpRequests = () => {
 
   useEffect(() => {
     todolistsApi.getTodolists().then((res) => {
-      const todolists = res.data
+      const todolists = res.data.data
       setTodolists(todolists)
       todolists.forEach((todolist) => {
         tasksApi.getTasks(todolist.id).then((res) => {
@@ -28,7 +28,7 @@ export const AppHttpRequests = () => {
 
   const createTodolist = (title: string) => {
     todolistsApi.createTodolist(title).then((res) => {
-      const newTodolist = res.data.data.item
+      const newTodolist = res.data.data
       setTodolists((prev) => [newTodolist, ...prev])
     })
   }
@@ -110,7 +110,10 @@ export const AppHttpRequests = () => {
       {todolists.map((todolist) => (
         <div key={todolist.id} style={container}>
           <div>
-            <EditableSpan value={todolist.title} onChange={(title) => changeTodolistTitle(todolist.id, title)} />
+            <EditableSpan
+              value={todolist.attributes.title}
+              onChange={(title) => changeTodolistTitle(todolist.id, title)}
+            />
             <button onClick={() => deleteTodolist(todolist.id)}>x</button>
           </div>
           <CreateItemForm onCreateItem={(title) => createTask(todolist.id, title)} />
