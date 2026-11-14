@@ -1,11 +1,10 @@
-export type FieldError = {
-  error: string
-  field: string
-}
+import { Todolist } from "@/features/todolists/api/todolistsApi.types.ts"
 
-export type BaseResponse<T = {}> = {
+// export type FieldError = {
+//   error: string
+//   field: string
+// }
+
+export type BaseResponse<T = Todolist> = {
   data: T
-  resultCode: number
-  messages: string[]
-  fieldsErrors: FieldError[]
 }

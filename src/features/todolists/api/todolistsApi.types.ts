@@ -28,15 +28,3 @@ export type Todolist = {
     }
   }
 }
-
-export type GetTodolistsResponse = {
-  data: Todolist[]
-}
-
-export type CreateTodolistResponse = {
-  data: Todolist
-}
-
-export type UpdateTodolistResponse = {
-  data: Todolist
-}
