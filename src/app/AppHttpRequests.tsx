@@ -12,8 +12,7 @@ export const AppHttpRequests = () => {
   const [tasks, setTasks] = useState<Record<string, DomainTask[]>>({})
 
   useEffect(() => {
-    todolistsApi.getTodolists().then((res) => {
-      const todolists = res.data.data.map(({ id, attributes }) => ({ id, ...attributes }))
+    todolistsApi.getTodolists().then((todolists) => {
       setTodolists(todolists)
       // todolists.forEach((todolist) => {
       //   tasksApi.getTasks(todolist.id).then((res) => {
@@ -28,9 +27,7 @@ export const AppHttpRequests = () => {
   }, [])
 
   const createTodolist = (title: string) => {
-    todolistsApi.createTodolist(title).then((res) => {
-      const { id, attributes } = res.data.data
-      const newTodolist = { id, ...attributes }
+    todolistsApi.createTodolist(title).then((newTodolist) => {
       setTodolists((prev) => [newTodolist, ...prev])
     })
   }
@@ -40,9 +37,7 @@ export const AppHttpRequests = () => {
   }
 
   const changeTodolistTitle = (id: string, title: string) => {
-    todolistsApi.changeTodolistTitle({ id, title }).then((res) => {
-      const { id, attributes } = res.data.data
-      const updatedTodolist = { id, ...attributes }
+    todolistsApi.changeTodolistTitle({ id, title }).then((updatedTodolist) => {
       setTodolists((prev) => prev.map((todolist) => (todolist.id === id ? updatedTodolist : todolist)))
     })
   }
