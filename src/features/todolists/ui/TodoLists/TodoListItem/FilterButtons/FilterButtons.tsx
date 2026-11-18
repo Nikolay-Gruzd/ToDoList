@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import { FilterValues, TodoList } from "@/app/Main.tsx"
-import { changeTodolistFilterAC } from "@/features/todolists/model/todolists-reducer.ts"
+import { changeTodolistFilterAC } from "@/features/todolists/model/todolists-slice.ts"
 import { useAppDispatch } from "@/common/hooks"
 import { containerSx } from "@/common/styles"
 

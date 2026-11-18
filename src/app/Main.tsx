@@ -2,25 +2,8 @@ import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
 import { CreateItemForm } from "@/common/components"
 import { useAppDispatch } from "@/common/hooks"
-import { createTodolistAC } from "@/features/todolists/model/todolists-reducer.ts"
+import { createTodolistAC } from "@/features/todolists/model/todolists-slice.ts"
 import { Todolists } from "@/features/todolists/ui/TodoLists/Todolists.tsx"
-
-// Types //
-
-export type FilterValues = "all" | "active" | "completed"
-
-export type Task = {
-  id: string
-  title: string
-  isDone: boolean
-}
-export type TasksState = Record<string, Task[]> // { [key: string]: Task[] }
-
-export type TodoList = {
-  id: string
-  title: string
-  filter: FilterValues
-}
 
 export const Main = () => {
   const dispatch = useAppDispatch()
