@@ -1,11 +1,11 @@
 import { useAppSelector } from "@/common/hooks"
-import { selectTasks } from "@/features/todolists/model/tasks-selectors.ts"
 import List from "@mui/material/List"
-import { TodoList } from "@/app/Main.tsx"
 import { TaskItem } from "@/features/todolists/ui/TodoLists/TodoListItem/Tasks/TaskItem/TaskItem.tsx"
+import { Todolist } from "@/features/todolists/model/todolists-slice.ts"
+import { selectTasks } from "@/features/todolists/model/tasks-slice.ts"
 
 type Props = {
-  todoLists: TodoList
+  todoLists: Todolist
 }
 
 export const Tasks = ({ todoLists }: Props) => {

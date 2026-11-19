@@ -11,6 +11,9 @@ export type TasksState = Record<string, Task[]> // { [key: string]: Task[] }
 export const tasksSlice = createSlice({
   name: "tasks",
   initialState: {} as TasksState,
+  selectors: {
+    selectTasks: (state) => state,
+  },
   reducers: (create) => ({
     deleteTaskAC: create.reducer<{ todoListId: string; taskId: string }>((state, action) => {
       const index = state[action.payload.todoListId].findIndex((task) => task.id === action.payload.taskId)
@@ -54,5 +57,6 @@ export const tasksSlice = createSlice({
   },
 })
 
+export const { selectTasks } = tasksSlice.selectors
 export const { createTaskAC, deleteTaskAC, changeTaskStatusAC, changeTaskTitleAC } = tasksSlice.actions
 export const tasksReducer = tasksSlice.reducer
