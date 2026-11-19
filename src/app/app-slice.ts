@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-// import { selectChangeThemeMode } from "@/app/app-selectors.ts"
 
 export type ThemeMode = "dark" | "light"
 
