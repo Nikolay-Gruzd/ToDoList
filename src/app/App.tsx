@@ -3,9 +3,9 @@ import { ThemeProvider } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"
 import { Header } from "@/common/components"
 import { getTheme } from "@/common/theme"
-import { selectChangeThemeMode } from "@/app/app-selectors.ts"
 import { Main } from "@/app/Main.tsx"
 import { useAppSelector } from "@/common/hooks"
+import { selectChangeThemeMode } from "@/app/app-slice.ts"
 
 export const App = () => {
   // Data //
