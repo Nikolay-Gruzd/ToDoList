@@ -1,13 +1,12 @@
 import { EditableSpan } from "@/common/components"
 import IconButton from "@mui/material/IconButton"
 import DeleteIcon from "@mui/icons-material/Delete"
-import { changeTodolistTitleAC, deleteTodolistAC } from "@/features/todolists/model/todolists-slice.ts"
+import { changeTodolistTitleTC, deleteTodolistAC, DomainTodolist } from "@/features/todolists/model/todolists-slice.ts"
 import { useAppDispatch } from "@/common/hooks"
-import { TodoList } from "@/app/Main.tsx"
 import s from "./TodolistTitle.module.css"
 
 type Props = {
-  todoLists: TodoList
+  todoLists: DomainTodolist
 }
 
 export const TodoListTitle = ({ todoLists }: Props) => {
@@ -19,7 +18,7 @@ export const TodoListTitle = ({ todoLists }: Props) => {
     dispatch(deleteTodolistAC({ id }))
   }
   const changeTodoListTitle = (title: string) => {
-    dispatch(changeTodolistTitleAC({ id, title }))
+    dispatch(changeTodolistTitleTC({ id, title }))
   }
 
   return (
