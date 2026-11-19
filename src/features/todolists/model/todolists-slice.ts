@@ -42,11 +42,13 @@ export const todolistSlice = createSlice({
     }),
   }),
   extraReducers: (builder) => {
-    builder.addCase(fetchTodolistsTC.fulfilled, (_state, action) => {
-      return action.payload?.todolists.map((todolist) => {
-        return { ...todolist, filter: "all" }
+    builder
+      .addCase(fetchTodolistsTC.fulfilled, (_state, action) => {
+        return action.payload?.todolists.map((todolist) => {
+          return { ...todolist, filter: "all" }
+        })
       })
-    })
+      .addCase(fetchTodolistsTC.rejected, (state, action) => {})
   },
 })
 
@@ -55,11 +57,11 @@ export const { deleteTodolistAC, createTodolistAC, changeTodolistTitleAC, change
   todolistSlice.actions
 export const todolistsReducer = todolistSlice.reducer
 
-export const fetchTodolistsTC = createAsyncThunk(`${todolistSlice.name}/fetchTodolistsTC`, async (_, _thunkAPI) => {
+export const fetchTodolistsTC = createAsyncThunk(`${todolistSlice.name}/fetchTodolistsTC`, async (_, thunkAPI) => {
   try {
     const todolists = await todolistsApi.getTodolists()
     return { todolists }
   } catch (error) {
-    console.log(error)
+    return thunkAPI.rejectWithValue(null)
   }
 })
