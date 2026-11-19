@@ -53,10 +53,11 @@ export const { setTodolistsAC, deleteTodolistAC, createTodolistAC, changeTodolis
   todolistSlice.actions
 export const todolistsReducer = todolistSlice.reducer
 
-export const fetchTodolistsTC = createAsyncThunk(`${todolistSlice.name}/fetchTodolistsTC`, (_, thunkAPI) => {
-  // в санке можно делать побочные эффекты (запросы на сервер)
-  todolistsApi.getTodolists().then((todolists) => {
-    // и диспатчить экшены (action) или другие санки (thunk)
+export const fetchTodolistsTC = createAsyncThunk(`${todolistSlice.name}/fetchTodolistsTC`, async (_, thunkAPI) => {
+  try {
+    const todolists = await todolistsApi.getTodolists()
     thunkAPI.dispatch(setTodolistsAC({ todolists }))
-  })
+  } catch (error) {
+    console.log(error)
+  }
 })

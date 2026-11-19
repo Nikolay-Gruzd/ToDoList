@@ -10,10 +10,6 @@ export const Todolists = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    // todolistsApi.getTodolists().then((todolists) => {
-    //   dispatch(setTodolistsAC({ todolists }))
-    //   console.log(todolists)
-    // })
     dispatch(fetchTodolistsTC())
   }, [])
 
