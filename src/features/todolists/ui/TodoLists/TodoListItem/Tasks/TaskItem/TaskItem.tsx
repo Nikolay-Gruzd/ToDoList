@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/common/hooks"
-import { changeTaskStatusAC, changeTaskTitleAC, deleteTaskAC } from "@/features/todolists/model/tasks-reducer.ts"
+import { changeTaskStatusAC, changeTaskTitleAC, deleteTaskAC } from "@/features/todolists/model/tasks-slice.ts"
 import { Task } from "@/app/Main.tsx"
 import { ChangeEvent } from "react"
 import ListItem from "@mui/material/ListItem"
